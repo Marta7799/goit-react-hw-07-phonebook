@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { getIsLoading, getFilteredContacts } from '../../redux/selectors';
-import { deleteContact } from '../../redux/operations';
+import { ContactListItem } from './ContactListItem';
 import { useEffect } from 'react';
 import { fetchContacts } from '../../redux/operations';
 
@@ -22,16 +22,7 @@ export const ContactList = () => {
       ) : (
         <ul className={css.contactList}>
           {contacts.map((contact, id) => (
-            <li key={id} className={css.contactListItem}>
-              {contact.name}: {contact.number}
-              <button
-                type="button"
-                className={css.contactListItemBtn}
-                onClick={() => dispatch(deleteContact(contact.id))}
-              >
-                Delete
-              </button>
-            </li>
+            <ContactListItem key={id} contact={contact} />
           ))}
         </ul>
       )}
